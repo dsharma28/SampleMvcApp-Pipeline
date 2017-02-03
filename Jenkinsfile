@@ -79,10 +79,10 @@ node('windows-agent') {
 	}
 	
 	stage('Deploy') {  
-		xldDeploy serverCredentials: 'admin', environmentId: 'Environments/Dev', packageId: 'Applications/<project_name>/$BUILD_NUMBER.0'
+		xldDeploy serverCredentials: 'Admin', environmentId: 'Environments/Dev', packageId: 'Applications/<project_name>/$BUILD_NUMBER.0'
 	}  
 	
 	stage('Start XLR Release') {
-		xlrCreateRelease serverCredentials: 'admin', template: 'Release MvcApp', releaseTitle: 'Release for $BUILD_TAG', variables: [[propertyName: 'version', propertyValue: '$BUILD_NUMBER.0']], startRelease: true
+		xlrCreateRelease serverCredentials: 'Admin', template: 'Release MvcApp', releaseTitle: 'Release for $BUILD_TAG', variables: [[propertyName: 'version', propertyValue: '$BUILD_NUMBER.0']], startRelease: true
 	}
 }
