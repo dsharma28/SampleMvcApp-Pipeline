@@ -1,7 +1,7 @@
 node('windows-agent') {
 	stage 'Checkout'
 	
-			bat 'echo git init &&  git config http.sslVerify false'
+			//bat 'echo git init &&  git config http.sslVerify false'
 //			checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/JonPSmith/SampleMvcWebApp.git']]])
 	
 	stage 'Build'
@@ -10,15 +10,15 @@ node('windows-agent') {
 			String msBuildHome  = "C:/Program Files (x86)/MSBuild/14.0/Bin"
 		
 			// nuget to download dependencies 
-			 bat "echo \"${appsHome}/nuget.exe\" restore SampleWebApp.sln"			
-			 bat "echo \"${msBuildHome}/MSBuild.exe\" SampleWebApp.sln  /p:OutDir=target /p:Configuration=Debug /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
+			 //bat "echo \"${appsHome}/nuget.exe\" restore SampleWebApp.sln"			
+			 //bat "echo \"${msBuildHome}/MSBuild.exe\" SampleWebApp.sln  /p:OutDir=target /p:Configuration=Debug /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
 	
 	
 	stage 'Test'
 			
 			String nUnit        = "${appsHome}/NUnit.org"
 			
-			bat "echo \"${nUnit}/nunit-console/nunit3-console.exe\" --result:TestResult.xml;format=nunit2  Tests/bin/Debug/Tests.dll"
+			//bat "echo \"${nUnit}/nunit-console/nunit3-console.exe\" --result:TestResult.xml;format=nunit2  Tests/bin/Debug/Tests.dll"
 			//step([$class: 'NUnitPublisher', testResultsPattern:'**/TestResult.xml', debug: false, keepJUnitReports: true, skipJUnitArchiver:false, failIfNoResults: true]) 
 	
 	stage 'Code Analysis'
@@ -28,9 +28,9 @@ node('windows-agent') {
 			String sonarqube_host ="http://localhost:9000/"        
 			String projectKey     = "SampleWebApp"
 			
-			bat "echo \"${sonarMSBuild}/SonarQube.Scanner.MSBuild.exe\" begin  /d:sonar.host.url=${sonarqube_host}  /k:\"${projectKey}\" /n:\"${projectKey}\" /v:\"1.0\" "
-			bat "echo \"${msBuildHome}/MSBuild.exe\" /t:Rebuild"
-			bat "echo \"${sonarMSBuild}/MSBuild.SonarQube.Runner.exe\" end"
+			//bat "echo \"${sonarMSBuild}/SonarQube.Scanner.MSBuild.exe\" begin  /d:sonar.host.url=${sonarqube_host}  /k:\"${projectKey}\" /n:\"${projectKey}\" /v:\"1.0\" "
+			//bat "echo \"${msBuildHome}/MSBuild.exe\" /t:Rebuild"
+			//bat "echo \"${sonarMSBuild}/MSBuild.SonarQube.Runner.exe\" end"
 				 
 			//def response = httpRequest "${sonarqube_host}/api/qualitygates/project_status?projectKey=${projectKey}"
 			//def slurper  = new groovy.json.JsonSlurper()
@@ -67,6 +67,22 @@ node('windows-agent') {
 		}'''
 		
 		// Upload to Artifactory and publish.		
-			def buildInfo1 = server.upload spec: uploadSpec
-			server.publishBuildInfo buildInfo1 
+		def buildInfo1 = server.upload spec: uploadSpec
+		server.publishBuildInfo buildInfo1 
+	
+	stage('Package') {  
+		xldCreatePackage artifactsPath: 'build/libs', manifestPath: 'deployit-manifest.xml', darPath: '$JOB_NAME-$BUILD_NUMBER.0.dar'  
+  	}  
+	
+	stage('Publish') {  
+		xldPublishPackage serverCredentials: 'admin', darPath: '$JOB_NAME-$BUILD_NUMBER.0.dar'
+	}
+	
+	stage('Deploy') {  
+		xldDeploy serverCredentials: 'admin', environmentId: 'Environments/Dev', packageId: 'Applications/<project_name>/$BUILD_NUMBER.0'
+	}  
+	
+	stage('Start XLR Release') {
+		xlrCreateRelease serverCredentials: 'admin', template: 'Release MvcApp', releaseTitle: 'Release for $BUILD_TAG', variables: [[propertyName: 'version', propertyValue: '$BUILD_NUMBER.0']], startRelease: true
+	}
 }
