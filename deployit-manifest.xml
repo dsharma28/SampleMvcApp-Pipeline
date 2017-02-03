@@ -6,6 +6,7 @@
     <iis.WebContent name="SampleMvcApp-files" file="SampleWebApp/">
       <tags />
       <scanPlaceholders>false</scanPlaceholders>
+      <targetPath>C:\inetpub\samplewebapp</targetPath>
     </iis.WebContent>
   </deployables>
   <applicationDependencies />
