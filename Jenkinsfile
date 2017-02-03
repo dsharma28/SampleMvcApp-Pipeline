@@ -2,7 +2,7 @@ node('windows-agent') {
 	stage 'Checkout'
 	
 			bat 'git init && git config http.sslVerify false'
-			checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/vlussenburg/SampleMvcWebApp.git']]])
+			checkout scm: [$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/vlussenburg/SampleMvcWebApp.git']]]
 	
 	stage 'Build'
 			// specify the home path of exe files
