@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<udm.DeploymentPackage version="$BUILD_NUMBER.0" application="rest-o-rant-web">
+<udm.DeploymentPackage version="$BUILD_NUMBER.0" application="SampleMvcApp">
   <application />
   <orchestrator />
   <deployables>
-    <iis.WebContent name="SampleMvcApp" file="/">
+    <iis.WebContent name="SampleMvcApp-files" file="/">
       <tags />
       <scanPlaceholders>false</scanPlaceholders>
     </iis.WebContent>
