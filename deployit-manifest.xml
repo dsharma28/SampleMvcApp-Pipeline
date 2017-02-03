@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<udm.DeploymentPackage version="$BUILD_NUMBER.0" application="rest-o-rant-web">
+  <application />
+  <orchestrator />
+  <deployables>
+    <iis.WebContent name="/rest-o-rant-web" file="/distributions/rest-o-rant-web">
+      <tags />
+      <scanPlaceholders>false</scanPlaceholders>
+    </www.WebContent>
+  </deployables>
+  <applicationDependencies />
+  <dependencyResolution>LATEST</dependencyResolution>
+  <undeployDependencies>false</undeployDependencies>
+</udm.DeploymentPackage>
