@@ -41,9 +41,9 @@ node('windows-agent') {
 	
 	  stage 'Archive'
 	
-			archiveArtifacts artifacts: 'DataLayer/target/*.*,ServiceLayer/target/*.*,SampleWebApp/target/*.*', fingerprint: true
-			def server = Artifactory.newServer url:'http://localhost:9090/artifactory', username:'admin', password:'password'
-			server.setBypassProxy(true)
+			//archiveArtifacts artifacts: 'DataLayer/target/*.*,ServiceLayer/target/*.*,SampleWebApp/target/*.*', fingerprint: true
+			//def server = Artifactory.newServer url:'http://localhost:9090/artifactory', username:'admin', password:'password'
+			//server.setBypassProxy(true)
 		
 			def uploadSpec =
 			'''{
@@ -67,8 +67,8 @@ node('windows-agent') {
 		}'''
 		
 		// Upload to Artifactory and publish.		
-		def buildInfo1 = server.upload spec: uploadSpec
-		server.publishBuildInfo buildInfo1 
+		//def buildInfo1 = server.upload spec: uploadSpec
+		//server.publishBuildInfo buildInfo1 
 	
 	stage('Package') {  
 		xldCreatePackage artifactsPath: 'build/libs', manifestPath: 'deployit-manifest.xml', darPath: '$JOB_NAME-$BUILD_NUMBER.0.dar'  
