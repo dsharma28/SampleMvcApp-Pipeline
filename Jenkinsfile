@@ -1,7 +1,7 @@
 node('windows-agent') {
 	stage 'Checkout'
 	
-			bat 'git config http.sslVerify false && git clone https://github.com/vlussenburg/SampleMvcWebApp.git .'
+			bat 'git clone https://github.com/vlussenburg/SampleMvcWebApp.git .'
 			//checkout scm: [$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/vlussenburg/SampleMvcWebApp.git']]]
 	
 	stage 'Build'
