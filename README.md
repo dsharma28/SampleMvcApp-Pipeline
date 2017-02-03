@@ -45,3 +45,4 @@ DI is used throughout this web site, but specific examples are:
 
 Note that the SampleMvcWebApp uses AutoFac dependency injection framework, 
 but the framework allows you to replace AutoFac with your own favourite DI tool.
+# SampleMvcApp-Pipeline
