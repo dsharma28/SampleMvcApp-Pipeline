@@ -75,7 +75,7 @@ node('windows-agent') {
   	}  
 	
 	stage('Publish') {  
-		xldPublishPackage serverCredentials: 'admin', darPath: '$JOB_NAME-$BUILD_NUMBER.0.dar'
+		xldPublishPackage serverCredentials: 'Admin', darPath: '$JOB_NAME-$BUILD_NUMBER.0.dar'
 	}
 	
 	stage('Deploy') {  
