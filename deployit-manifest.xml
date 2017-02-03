@@ -3,7 +3,7 @@
   <application />
   <orchestrator />
   <deployables>
-    <iis.WebContent name="SampleMvcApp-files" file="Content/">
+    <iis.WebContent name="SampleMvcApp-files" file="SampleWebApp/">
       <tags />
       <scanPlaceholders>false</scanPlaceholders>
     </iis.WebContent>
