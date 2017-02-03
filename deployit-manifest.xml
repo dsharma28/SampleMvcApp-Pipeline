@@ -3,10 +3,10 @@
   <application />
   <orchestrator />
   <deployables>
-    <iis.WebContent name="/rest-o-rant-web" file="/distributions/rest-o-rant-web">
+    <iis.WebContent name="SampleMvcApp" file="SampleMvcApp/">
       <tags />
       <scanPlaceholders>false</scanPlaceholders>
-    </www.WebContent>
+    </iis.WebContent>
   </deployables>
   <applicationDependencies />
   <dependencyResolution>LATEST</dependencyResolution>
