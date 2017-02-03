@@ -69,5 +69,5 @@ node('windows-agent') {
 		
 		// Upload to Artifactory and publish.		
 			def buildInfo1 = server.upload spec: uploadSpec
-			server.publishBuildInfo buildInfo1 `§  
+			server.publishBuildInfo buildInfo1 
 }
