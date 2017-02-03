@@ -71,7 +71,7 @@ node('windows-agent') {
 		//server.publishBuildInfo buildInfo1 
 	
 	stage('Package') {  
-		xldCreatePackage artifactsPath: 'build/libs', manifestPath: 'deployit-manifest.xml', darPath: '$JOB_NAME-$BUILD_NUMBER.0.dar'  
+		xldCreatePackage artifactsPath: '', manifestPath: 'deployit-manifest.xml', darPath: '$JOB_NAME-$BUILD_NUMBER.0.dar'  
   	}  
 	
 	stage('Publish') {  
