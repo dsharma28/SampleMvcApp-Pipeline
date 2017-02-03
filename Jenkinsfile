@@ -79,7 +79,7 @@ node('windows-agent') {
 	}
 	
 	stage('Deploy') {  
-		xldDeploy serverCredentials: 'Admin', environmentId: 'Environments/Dev', packageId: 'Applications/SampleWebApp/$BUILD_NUMBER.0'
+		xldDeploy serverCredentials: 'Admin', environmentId: 'Environments/Dev', packageId: 'Applications/SampleMvcApp/$BUILD_NUMBER.0'
 	}  
 	
 	stage('Start XLR Release') {
