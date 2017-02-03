@@ -1,4 +1,4 @@
-
+node('windows-agent') {
 	stage 'Checkout'
 	
 			bat 'git init &&  git config http.sslVerify false'
@@ -69,9 +69,5 @@
 		
 		// Upload to Artifactory and publish.		
 			def buildInfo1 = server.upload spec: uploadSpec
-			server.publishBuildInfo buildInfo1 
-			
-
-
-  
-   
+			server.publishBuildInfo buildInfo1 `§  
+}
