@@ -3,11 +3,24 @@
   <application />
   <orchestrator />
   <deployables>
+    <iis.ApplicationPoolSpec name="SampleMvcApp-applicationPool">
+      <managedRuntimeVersion>v4.0</managedRuntimeVersion>
+    </iis.ApplicationPoolSpec>
     <iis.WebContent name="SampleMvcApp-files" file="SampleWebApp/">
       <tags />
       <scanPlaceholders>false</scanPlaceholders>
       <targetPath>C:\inetpub\samplewebapp</targetPath>
     </iis.WebContent>
+    <iis.WebsiteSpec name="SampleMvcApp-website">
+      <websiteName>SampleMvcApp</websiteName>
+      <physicalPath>C:\inetpub\samplewebapp</physicalPath>
+      <applicationPoolName>SampleMvcApp-applicationPool</applicationPoolName>
+      <bindings>
+        <iis.WebsiteBindingSpec name="SampleMvcApp-website/8080">
+          <port>8080</port>
+        </iis.WebsiteBindingSpec>
+      </bindings>
+    </iis.WebsiteSpec>
   </deployables>
   <applicationDependencies />
   <dependencyResolution>LATEST</dependencyResolution>
