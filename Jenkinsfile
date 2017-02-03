@@ -1,8 +1,8 @@
 node('windows-agent') {
 	stage 'Checkout'
 	
-			bat 'git clone https://github.com/vlussenburg/SampleMvcWebApp.git .'
-			//checkout scm: [$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/vlussenburg/SampleMvcWebApp.git']]]
+			bat 'git init'
+			checkout scm: [$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/vlussenburg/SampleMvcApp-Pipeline']]]
 	
 	stage 'Build'
 			// specify the home path of exe files
